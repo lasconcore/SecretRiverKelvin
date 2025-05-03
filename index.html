@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SRK</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="menu-toggle" class="menu-toggle">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <nav id="menu" class="menu">
+    <ul>
+      <li>
+        <a href="#about">About</a>
+        <div class="about-text"> <b>SecretRiverKelvin</b><br><br> highlights spots where you can get down to the river bank along the River Kelvin. <br> <br> Most of the spots are only acessible when the river is low. <br> <br> The river can be very fast flowing, please be careful.</div>
+      </li>
+      <li><a href="#map">Map</a></li>
+      <div class="map-text">
+        Entrance point
+        <img src="/images/legend_circle.svg" alt="Legend Circle" class="legend_point-image"> <br>
+        SRK Spot
+        <img src="/images/legend_closed_river.svg" alt="Legend Area" class="legend_area-image"> <br>
+      </div>
+      <li><a href="#contact">Contact</a></li>
+      <div class="contact-text">If you have any more spots you'd like to add email: <br> SecretRiverKelvin@gmail.com  <br><br>screenshot of Google Maps location, .gpx file, point coordinates, ect. </div>
+    </ul>
+  </nav>
+  <div id="map"></div>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
