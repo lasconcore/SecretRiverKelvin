@@ -55,7 +55,7 @@ mapLink.addEventListener('click', (e) => {
 
 const basemapToggle = document.createElement('div');
 basemapToggle.className = 'basemap-toggle';
-basemapToggle.innerHTML = '<img src="/images/satellite_preview.jpg" alt="Satellite Preview">';
+basemapToggle.innerHTML = '<img src="images/satellite_preview.jpg" alt="Satellite Preview">';
 document.body.appendChild(basemapToggle);
 
 let isSatellite = false;
@@ -63,10 +63,10 @@ let isSatellite = false;
 basemapToggle.addEventListener('click', () => {
   if (isSatellite) {
     map.setStyle('mapbox://styles/lasconcore/cma5bbtvu003r01sd7yy51bro'); // Streets style
-    basemapToggle.innerHTML = '<img src="/images/satellite_preview.jpg" alt="Satellite Preview">';
+    basemapToggle.innerHTML = '<img src="images/satellite_preview.jpg" alt="Satellite Preview">';
   } else {
     map.setStyle('mapbox://styles/lasconcore/cmaehk5c800s501skh2up8xkp'); // Satellite Streets style
-    basemapToggle.innerHTML = '<img src="/images/streets_preview.jpg" alt="Streets Preview">';
+    basemapToggle.innerHTML = '<img src="images/streets_preview.jpg" alt="Streets Preview">';
   }
   isSatellite = !isSatellite;
 });
