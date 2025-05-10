@@ -55,7 +55,7 @@ mapLink.addEventListener('click', (e) => {
 
 const basemapToggle = document.createElement('div');
 basemapToggle.className = 'basemap-toggle';
-basemapToggle.innerHTML = '<img src="/images/satellite_preview.jpg" alt="Satellite Preview">';
+basemapToggle.innerHTML = '<img src="images/satellite_preview.jpg" alt="Satellite Preview">';
 document.body.appendChild(basemapToggle);
 
 let isSatellite = false;
@@ -71,12 +71,31 @@ basemapToggle.addEventListener('click', () => {
   isSatellite = !isSatellite;
 });
 
-// Add reset North Compass button
+// Add rotating compass functionality
 const compassReset = document.createElement('div');
 compassReset.className = 'compass-reset';
-compassReset.innerHTML = '⎈';
+compassReset.innerHTML = '<img src="images/compass_icon.png" alt="Compass">';
 document.body.appendChild(compassReset);
 
+// Hide compass initially
+compassReset.style.opacity = '0';
+compassReset.style.pointerEvents = 'none';
+
+// Update compass rotation and visibility based on map bearing
+map.on('rotate', () => {
+  const bearing = map.getBearing();
+  compassReset.style.transform = `rotate(${bearing}deg)`;
+
+  if (Math.abs(bearing) > 0.1) {
+    compassReset.style.opacity = '1'; // Fade in
+    compassReset.style.pointerEvents = 'auto';
+  } else {
+    compassReset.style.opacity = '0'; // Fade out
+    compassReset.style.pointerEvents = 'none';
+  }
+});
+
+// Reset map bearing to 0 when compass is clicked
 compassReset.addEventListener('click', () => {
   map.easeTo({ bearing: 0 });
 });
