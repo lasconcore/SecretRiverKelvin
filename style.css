@@ -154,3 +154,47 @@ body {
   height: 100%;
   object-fit: cover;
 }
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  #map {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .menu {
+    width: 200px; /* Reduce menu width */
+  }
+
+  .menu ul li {
+    padding: 10px; /* Reduce padding for menu items */
+  }
+
+  .about-text,
+  .map-text,
+  .contact-text {
+    font-size: 0.7em; /* Adjust font size for smaller screens */
+  }
+
+  .menu-toggle {
+    width: 25px; /* Reduce size of hamburger menu */
+    height: 25px;
+  }
+
+  .menu-toggle .bar {
+    height: 3px; /* Adjust bar thickness */
+  }
+
+  .basemap-toggle {
+    width: 40px; /* Reduce basemap toggle size */
+    height: 40px;
+  }
+
+  .legend_point-image {
+    max-width: 12%; /* Adjust legend image size */
+  }
+
+  .legend_area-image {
+    max-width: 50%; /* Adjust legend image size */
+  }
+}
