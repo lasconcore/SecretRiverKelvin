@@ -155,6 +155,26 @@ body {
   object-fit: cover;
 }
 
+.compass-reset {
+  position: absolute;
+  top: 120px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1000;
+  border: 2px solid white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: black;
+}
+
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
   #map {
@@ -196,5 +216,11 @@ body {
 
   .legend_area-image {
     max-width: 50%; /* Adjust legend image size */
+  }
+
+  .compass-reset {
+    width: 35px; /* Adjust size for smaller screens */
+    height: 35px;
+    font-size: 1.2em;
   }
 }
