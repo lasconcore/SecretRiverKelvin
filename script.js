@@ -2,7 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibGFzY29uY29yZSIsImEiOiJjbWE1cHZncHgwanZiMmpxd
 
 const map = new mapboxgl.Map({
   container: 'map', // ID of the map container
-  style: 'mapbox://styles/lasconcore/cma5bbtvu003r01sd7yy51bro',
+  style: 'mapbox://styles/lasconcore/cmamqp05s01hl01s3dmc68id6',
   center: [-4.2818, 55.8687], // Center at Glasgow
   zoom: 13 // Initial zoom level
 });
@@ -62,7 +62,7 @@ let isSatellite = false;
 
 basemapToggle.addEventListener('click', () => {
   if (isSatellite) {
-    map.setStyle('mapbox://styles/lasconcore/cma5bbtvu003r01sd7yy51bro'); // Streets style
+    map.setStyle('mapbox://styles/lasconcore/cmamqp05s01hl01s3dmc68id6'); // Streets style
     basemapToggle.innerHTML = '<img src="images/satellite_preview.jpg" alt="Satellite Preview">';
   } else {
     map.setStyle('mapbox://styles/lasconcore/cmaehk5c800s501skh2up8xkp'); // Satellite Streets style
