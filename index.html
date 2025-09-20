@@ -31,6 +31,37 @@
       <div class="contact-text">Contributions, email; <br><br> SecretRiverKelvin@gmail.com  <br><br> screenshot of Google Maps user location / .gpx file / coordinates <br><br> Whatever is most convinient </div>
     </ul>
   </nav>
+  <!-- Basemap toggle and compass reset assumed to be existing -->
+  <div class="basemap-toggle">
+    <!-- ...existing basemap toggle code... -->
+  </div>
+  <div class="compass-reset">
+    <!-- ...existing compass reset code... -->
+  </div>
+  <!-- New Filter toggle button and filter box -->
+  <div id="filter-toggle" class="filter-toggle">
+    <img src="images/settings-sliders.png" alt="Settings Sliders Icon" class="filter-icon">
+    <span>Filter</span>
+  </div>
+  <div id="filter-box" class="filter-box">
+    <div class="filter-header">
+      <span class="filter-close">x</span>
+    </div>
+    <div class="filter-options">
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="good"></button>
+        <span>Good</span>
+      </div>
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="average"></button>
+        <span>Average</span>
+      </div>
+      <div class="filter-row">
+        <button class="filter-btn active" data-filter="rugged"></button>
+        <span>Rugged</span>
+      </div>
+    </div>
+  </div>
   <div id="map"></div>
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
   <script src="script.js"></script>
