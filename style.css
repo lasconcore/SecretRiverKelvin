@@ -182,6 +182,110 @@ body {
   object-fit: contain;
 }
 
+.filter-toggle {
+  /* Updated style to match screenshot 20.07.04 */
+  background-color: white;  /* new lighter background */
+  color: #000;              /* ensure text remains black */
+  padding: 5px 10px;       /* increased padding */
+  border-radius: 8px;       /* more rounded corners */
+  border: 1px solid #ccc;   /* subtle border */
+  box-shadow: none;         /* remove existing box-shadow */
+  position: absolute;
+  top: 130px; /* Adjust vertical position as needed */
+  right: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  font-size: 0.8em;  
+  opacity: 0.7;           /* slight opacity */
+}
+
+.filter-toggle .filter-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.filter-box {
+  position: absolute;
+  top: 130px; /* same vertical starting point */
+  right: 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  transform: scale(0);
+  transform-origin: top right;
+  transition: transform 0.3s ease;
+  font-family: Arial, sans-serif;
+  font-size: 0.9em;         /* match header font */
+  font-weight: bold;        /* header style */
+  color: black;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  opacity: 0.9;
+}
+
+.filter-box.open {
+  transform: scale(1);
+}
+
+.filter-box .filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.filter-box .filter-header .filter-close {
+  position: absolute;
+  top: -4x;   /* Move above the header title */
+  left: -4px;  /* Move to the left of the header title */
+  cursor: pointer;
+  color: black;  /* Use same as sidebar body text */
+  font-family: Arial, sans-serif;
+  opacity: 0.5; /* slight opacity */
+}
+
+.filter-box .filter-header span:first-child {
+    color: grey;          /* set header text to grey */
+    font-weight: normal;  /* remove bold */
+}
+
+.filter-box .filter-row span {
+    color: black;         /* set option text to black */
+    font-weight: normal;  /* remove bold */
+}
+
+.filter-box .filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.filter-box .filter-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;  /* increased gap between buttons and text */
+  margin-left: 10px; /* shift row contents to the right */
+}
+.filter-box .filter-btn {
+  width: 16px; /* 20% smaller than 20px */
+  height: 16px;
+  border: 2px solid black;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 0.8; /* slight opacity */
+  filter: blur(0.5px); /* less blur */
+  cursor: pointer;
+}
+.filter-box .filter-btn.active {
+  background-color: pink;
+  /* Border remains black; opacity and blur may be adjusted if needed */
+}
+
 /* Responsive styles for smaller screens */
 @media (max-width: 768px) {
   #map {
