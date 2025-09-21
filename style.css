@@ -240,10 +240,21 @@ body {
   position: relative;
 }
 
+.filter-header .filter-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;  /* increased spacing */
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  margin-left: 10px; /* pushed content further to the right */
+}
+
 .filter-box .filter-header .filter-close {
   position: absolute;
-  top: -4x;   /* Move above the header title */
-  left: -4px;  /* Move to the left of the header title */
+  top: -8px;   /* Move above the header title */
+  left: -6px;  /* Move to the left of the header title */
   cursor: pointer;
   color: black;  /* Use same as sidebar body text */
   font-family: Arial, sans-serif;
@@ -284,6 +295,15 @@ body {
 .filter-box .filter-btn.active {
   background-color: pink;
   /* Border remains black; opacity and blur may be adjusted if needed */
+}
+
+.filter-icon-box {
+  width: 20px; /* increased by 5% from approximately 16px */
+  height: 17px;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* Responsive styles for smaller screens */
