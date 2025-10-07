@@ -1,13 +1,13 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibGFzY29uY29yZSIsImEiOiJjbWE1cHZncHgwanZiMmpxdXFzdjY3aTN2In0.KHIXaS5McVLHm4PqB2nkkA';
 
 const map = new mapboxgl.Map({
-  container: 'map', // ID of the map container
+  container: 'map',
   style: 'mapbox://styles/lasconcore/cmamqp05s01hl01s3dmc68id6',
-  center: [-4.2818, 55.8687], // Center at Glasgow
-  zoom: 13 // Initial zoom level
+  center: [-4.2818, 55.8687],
+  zoom: 13
 });
 
-// Add geolocate control to the map.
+// Add geolocate control
 map.addControl(
   new mapboxgl.GeolocateControl({
     positionOptions: { enableHighAccuracy: true },
@@ -16,7 +16,7 @@ map.addControl(
   })
 );
 
-// Hamburger menu toggle functionality
+// Hamburger menu
 const menuToggle = document.getElementById('menu-toggle');
 const menu = document.getElementById('menu');
 
@@ -27,7 +27,6 @@ menuToggle.addEventListener('click', () => {
 
 const aboutLink = document.querySelector('a[href="#about"]');
 const aboutText = document.querySelector('.about-text');
-
 aboutLink.addEventListener('click', (e) => {
   e.preventDefault();
   aboutText.classList.toggle('visible');
@@ -35,7 +34,6 @@ aboutLink.addEventListener('click', (e) => {
 
 const contactLink = document.querySelector('a[href="#contact"]');
 const contactText = document.querySelector('.contact-text');
-
 contactLink.addEventListener('click', (e) => {
   e.preventDefault();
   contactText.classList.toggle('visible');
@@ -43,29 +41,65 @@ contactLink.addEventListener('click', (e) => {
 
 const mapLink = document.querySelector('a[href="#map"]');
 const mapText = document.querySelector('.map-text');
-
 mapLink.addEventListener('click', (e) => {
   e.preventDefault();
   mapText.classList.toggle('visible');
 });
 
-// --- Basemap toggle ---
+// --- Basemap toggle (no setStyle) ---
 const basemapToggle = document.createElement('div');
 basemapToggle.className = 'basemap-toggle';
 basemapToggle.innerHTML = '<img src="images/satellite_preview.jpg" alt="Satellite Preview">';
 document.body.appendChild(basemapToggle);
 
-let isSatellite = false;
+let satOn = false;
+let toggleLock = false;
+
+function findFirstLabelLayerId() {
+  const layers = (map.getStyle() && map.getStyle().layers) || [];
+  for (const lyr of layers) {
+    if (lyr && lyr.type === 'symbol' && lyr.layout && lyr.layout['text-field']) {
+      return lyr.id; // insert below the first label layer
+    }
+  }
+  return undefined; // append on top if not found
+}
+
+map.on('load', () => {
+  // Add satellite raster source + layer once
+  if (!map.getSource('satellite')) {
+    map.addSource('satellite', {
+      type: 'raster',
+      url: 'mapbox://mapbox.satellite',
+      tileSize: 256
+    });
+
+    const beforeId = findFirstLabelLayerId();
+    map.addLayer(
+      {
+        id: 'satellite-base',
+        type: 'raster',
+        source: 'satellite',
+        layout: { visibility: 'none' }
+      },
+      beforeId // keeps labels above satellite if available
+    );
+  }
+});
 
 basemapToggle.addEventListener('click', () => {
-  if (isSatellite) {
-    map.setStyle('mapbox://styles/lasconcore/cmamqp05s01hl01s3dmc68id6');
-    basemapToggle.innerHTML = '<img src="images/satellite_preview.jpg" alt="Satellite Preview">';
-  } else {
-    map.setStyle('mapbox://styles/lasconcore/cmaehk5c800s501skh2up8xkp');
-    basemapToggle.innerHTML = '<img src="images/streets_preview.jpg" alt="Streets Preview">';
+  if (toggleLock) return;
+  toggleLock = true;
+  setTimeout(() => (toggleLock = false), 500); // debounce rapid clicks
+
+  satOn = !satOn;
+  const vis = satOn ? 'visible' : 'none';
+  if (map.getLayer('satellite-base')) {
+    map.setLayoutProperty('satellite-base', 'visibility', vis);
   }
-  isSatellite = !isSatellite;
+  basemapToggle.innerHTML = satOn
+    ? '<img src="images/streets_preview.jpg" alt="Streets Preview">'
+    : '<img src="images/satellite_preview.jpg" alt="Satellite Preview">';
 });
 
 // --- Compass reset ---
@@ -117,7 +151,7 @@ function getTargetLayerIds() {
   return targetIds;
 }
 
-// Substring-match filter for resilience to whitespace/case issues
+// Substring-match filter
 function makeFilterExpr(activeFilters) {
   const needles = activeFilters.map(s => String(s).toLowerCase());
   const haystack = ['downcase', ['coalesce', ['get', 'AcesBLvl'], '']];
@@ -141,7 +175,7 @@ function logFilteredLayers(context = 'initial') {
   console.log(`[SRK] (${context}) filtering ${ids.length} layers:`, ids);
 }
 
-// Debug: click to inspect features under cursor
+// Debug: inspect features
 map.on('click', (e) => {
   const feats = map.queryRenderedFeatures(e.point);
   if (!feats || !feats.length) return;
